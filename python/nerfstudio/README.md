@@ -1,0 +1,2 @@
+- venv
+- https://youtu.be/jXd-hkP4xnU
