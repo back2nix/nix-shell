@@ -18,3 +18,13 @@ use command in folder where .envrc:
 ```
 direnv allow
 ```
+
+# overide shell stdenv
+
+```nix
+pkgs.mkShell.override { stdenv = pkgs.gcc11Stdenv; } {
+    name = "my-override-shell";
+    buildInputs = with pkgs.python310Packages; [
+    ];
+}
+```
