@@ -1,0 +1,2 @@
+- https://github.com/igsha/nix-overlays
+- https://github.com/mozilla/nixpkgs-mozilla
