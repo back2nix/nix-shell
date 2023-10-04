@@ -1,0 +1,9 @@
+version: '3'
+services:
+  my-container:
+    build:
+      context: . # Путь к директории с Dockerfile (текущая директория)
+      dockerfile: Dockerfile # Имя вашего Dockerfile
+    tty: true # Для поддержки интерактивной оболочки (bash)
+    volumes:
+      - ./build:/build
