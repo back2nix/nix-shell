@@ -1,4 +1,4 @@
-# Incremetal build
+# Incremental build
 
 - Экономить время на сборке debug проекта и проще отлаживать
 
