@@ -8,6 +8,7 @@
 
 ```bash
 cp 1.stage.shell.nix shell.nix
+nix-shell --pure
 ```
 
 - для этого можно использовать `make download`
@@ -42,15 +43,11 @@ cp -r /nix/store/z47iqmixhnl9vb0h1znp41gfgwvkbzqm-opencv-4.7.0/* .
 
 ```bash
 cp 2.stage.shell.nix shell.nix
-```
-
-```shell.nix
-src = ./debug/source;
+nix-shell --pure
 ```
 
 - в конце `nix-shell --pure` должен происталить вашу модифицированную opencv в систему и можно будет компилировать
 - прокты которые используют opencv и отлаживать
-
 
 ### test sample
 
