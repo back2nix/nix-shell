@@ -1,0 +1,67 @@
+OPENCV_VERSION?=4.7.0
+
+TMP_DIR ?= ./source/
+
+clean:
+	rm -rf opencv-$(OPENCV_VERSION)/build
+
+download:
+	curl -Lo opencv.zip https://github.com/opencv/opencv/archive/$(OPENCV_VERSION).zip
+	unzip -q opencv.zip
+	curl -Lo opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/$(OPENCV_VERSION).zip
+	unzip -q opencv_contrib.zip
+	rm opencv.zip opencv_contrib.zip
+
+.PHONY: build
+configure:
+	mkdir -p opencv-$(OPENCV_VERSION)/build; \
+		cd opencv-$(OPENCV_VERSION)/build && \
+		cmake \
+		-DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF \
+		-DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF \
+		-DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_POLICY_DEFAULT_CMP0025=NEW \
+		-DCMAKE_OSX_SYSROOT= \
+		-DCMAKE_FIND_FRAMEWORK=LAST \
+		-DCMAKE_C_COMPILER=gcc \
+		-DCMAKE_CXX_COMPILER=g++ \
+		-DOPENCV_GENERATE_PKGCONFIG=ON \
+		-DWITH_OPENMP=ON \
+		-DBUILD_PROTOBUF=OFF \
+		-DPROTOBUF_UPDATE_FILES=ON \
+		-DOPENCV_ENABLE_NONFREE=OFF \
+		-DBUILD_TESTS=ON \
+		-DBUILD_PERF_TESTS=OFF \
+		-DCMAKE_SKIP_BUILD_RPATH=ON \
+		-DBUILD_DOCS=OFF \
+		-DOPENCV_ENABLE_PKG_CONFIG=ON \
+		-DWITH_TIFF=ON \
+		-DWITH_WEBP=ON \
+		-DWITH_JPEG=ON \
+		-DWITH_PNG=ON \
+		-DWITH_OPENEXR=ON \
+		-DWITH_OPENJPEG=ON \
+		-DWITH_ENABLE_LTO=ON \
+		-DOPENCV_SKIP_PYTHON_LOADER=ON \
+		-DBUILD_TESTING=OFF \
+		-DWITH_IPP=OFF \
+		-DWITH_JASPER=OFF \
+		-DWITH_TBB=OFF \
+		-DWITH_CUDA=OFF \
+		-DWITH_CUDA_FAST_MATH=OFF \
+		-DWITH_CUBLAS=OFF \
+		-DWITH_CUDNN=OFF \
+		-DWITH_CUFFT=OFF \
+		-DWITH_ENABLE_THIN_LTO=OFF \
+		-DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-$(OPENCV_VERSION)/modules \
+		-DOPENCL_LIBRARY=REPLACE_OPENCL_LIBRARY\
+		-DCMAKE_STRIP=REPLACE_CMAKE_STRIP \
+		-DCMAKE_RANLIB=REPLACE_CMAKE_RANLIB \
+		-DCMAKE_AR=REPLACE_CMAKE_AR \
+		-DProtobuf_PROTOC_EXECUTABLE=REPLACE_Protobuf_PROTOC_EXECUTABLE \
+		..
+
+build:
+	cd opencv-$(OPENCV_VERSION)/build && \
+		make -j$(nproc)
