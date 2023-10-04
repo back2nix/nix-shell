@@ -1,9 +1,8 @@
-{ pkgs ? import <nixpkgs> { } }:
-let
+{pkgs ? import <nixpkgs> {}}: let
   opencv4WithDebug = pkgs.python310Packages.opencv4.overrideAttrs (finalAttrs: old: {
     # separateDebugInfo = true;
     # dontStrip = true;
-    # cmakeBuildType = "Debug";
+    cmakeBuildType = "Debug";
     # dontUnpack = true;
     # phases = "unpackPhase";
 
@@ -77,31 +76,31 @@ let
   });
   # hello = pkgs.callPackage ./hello.nix { };
 in
-pkgs.mkShell
-{
-  name = "opencv4-shell";
+  pkgs.mkShell
+  {
+    name = "opencv4-shell";
 
-  # nativeBuildInputs is usually what you want -- tools you need to run
-  # nativeBuildInputs = with pkgs; [
-  #   # hello
-  #   stdenv
-  #   # opencv4WithDebug
-  #   gdb
-  #   cmake
-  # ];
+    # nativeBuildInputs is usually what you want -- tools you need to run
+    # nativeBuildInputs = with pkgs; [
+    #   # hello
+    #   stdenv
+    #   # opencv4WithDebug
+    #   gdb
+    #   cmake
+    # ];
 
-  nativeBuildInputs = with pkgs; [
-    opencv4WithDebug
-  ];
+    nativeBuildInputs = with pkgs; [
+      opencv4WithDebug
+    ];
 
-  # shellHook = ''
-  # touch file
-  # echo sourceRoot=$sourceRoot
-  # runHook unpackPhase
-  # echo sourceRoot=$sourceRoot
-  # cd $sourceRoot
-  # runHook patchPhase
-  # '';
+    # shellHook = ''
+    # touch file
+    # echo sourceRoot=$sourceRoot
+    # runHook unpackPhase
+    # echo sourceRoot=$sourceRoot
+    # cd $sourceRoot
+    # runHook patchPhase
+    # '';
 
-  # hardeningDisable = [ "all" ];
-}
+    # hardeningDisable = [ "all" ];
+  }

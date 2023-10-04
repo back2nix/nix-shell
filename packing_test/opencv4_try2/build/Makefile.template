@@ -14,6 +14,7 @@ configure:
 	mkdir -p opencv/build; \
 		cd opencv/build && \
 		cmake \
+		-DCMAKE_BUILD_TYPE=Debug \
 		-DCMAKE_INSTALL_PREFIX=install_dir \
 		-DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF \
 		-DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF \
