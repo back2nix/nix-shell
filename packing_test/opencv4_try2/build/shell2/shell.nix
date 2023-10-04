@@ -15,6 +15,7 @@ pkgs.mkShell
     openssh
     # opencv
     stdenv
+    gdb
   ];
 
   shellHook = ''
