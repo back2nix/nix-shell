@@ -2,7 +2,7 @@
   opencv4WithDebug = pkgs.python310Packages.opencv4.overrideAttrs (finalAttrs: old: {
     # separateDebugInfo = true;
     # dontStrip = true;
-    cmakeBuildType = "Debug";
+    # cmakeBuildType = "Debug";
     # dontUnpack = true;
     # phases = "unpackPhase";
 
@@ -19,6 +19,12 @@
     # dontUnpack = true;
     dontPatch = true;
     # dontConfigure = true;
+    # dontInstall = true;
+    doChek = false;
+
+    preConfigure = ''
+      # mv build ..
+    '';
 
     # postUnpack =
     #   old.postUnpack
@@ -42,6 +48,41 @@
     #   cp -r "/build/$sourceRoot" $out
     #   echo "sourceRoot=$sourceRoot" >$out/sourceRoot.env.sh
     # '';
+    outputs = [
+      "out"
+    ];
+
+    buildPhase = ''
+      # mv build build_new
+      # mv ../build .
+      # cp build_new/*.txt build
+      # echo ls
+      # ls .
+      # cd build
+
+      make -j$(nproc)
+
+      # make install
+
+      echo Path:
+      echo $out
+      # mkdir -p $out/build
+      # cp -r * $out/build
+      # false
+      # make install
+    '';
+
+    preInstall = ''
+    '';
+
+    # postInstall = ''
+    #   make install
+    #   sed -i "s|{exec_prefix}/$out|{exec_prefix}|;s|{prefix}/$out|{prefix}|" \
+    #   "$out/lib/pkgconfig/opencv4.pc"
+    # '';
+
+    # postBuild = ''
+    # '';
 
     # preConfigure =
     #   old.preConfigure
@@ -49,17 +90,17 @@
     #     false
     #   '';
 
-    preBuild = ''
-      # echo "ls ."
-      #   ls .
-      # echo "ls .."
-      #   ls ..
-      # echo "ls ../.."
-      #   ls ../..
-        # mkdir -p $out/save
-        # cp -r ../../source $out/save
-        false
-    '';
+    # preBuild = ''
+    #   # echo "ls ."
+    #   #   ls .
+    #   # echo "ls .."
+    #   #   ls ..
+    #   # echo "ls ../.."
+    #   #   ls ../..
+    #     # mkdir -p $out/save
+    #     # cp -r ../../source $out/save
+    #     false
+    # '';
     # export NIX_ENFORCE_PURITY=0 - not work
 
     # dontBuild = true;
@@ -69,7 +110,8 @@
     # git clone --branch 4.7.0 https://github.com/opencv/opencv_contrib.git
     # git clone --branch 4.7.0 https://github.com/opencv/opencv_extra.git
 
-    src = builtins.fetchGit /home/bg/Documents/code/github.com/back2nix/nix/nix-shell/packing_test/opencv/source/opencv;
+    src = /home/bg/Documents/code/github.com/back2nix/nix/nix-shell/packing_test/opencv4_try2/release/source;
+    # src = builtins.fetchGit /home/bg/Documents/code/github.com/back2nix/nix/nix-shell/packing_test/opencv/source/opencv;
     # src = /home/bg/Documents/code/github.com/back2nix/nix/nix-shell/packing_test/opencv/source/opencv;
     # contribSrc = builtins.fetchGit /home/bg/Documents/code/github.com/back2nix/nix/nix-shell/packing_test/opencv/source/opencv_contrib;
     # testDataSrc = builtins.fetchGit /home/bg/Documents/code/github.com/back2nix/nix/nix-shell/packing_test/opencv/source/opencv_extra;
