@@ -25,7 +25,7 @@ let
       echo $out
 
       ## -- for get prebuild + source folders
-      ## -- commented this after save prebuild folder in local machine
+      ## -- required only on the first stage, then you need to comment
       mkdir -p $out/build
       cp -r * $out/build
       false
@@ -34,7 +34,9 @@ let
     preInstall = ''
     '';
 
-    # src = ./debug/source; # and set, dontPatch = true;
+    # src = ./debug/source; # second run, set: dontPatch = true;
+
+    # first run so the stalemate can apply
     src = builtins.fetchGit {
       shallow = true;
       url = ./debug/source; # without prebuild, only source
