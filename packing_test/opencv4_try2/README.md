@@ -52,6 +52,12 @@ nix-shell --pure
 ### test sample
 
 - пример должен собраться
+- если еще не запустили nix-shell
+
+```bash
+nix-shell --pure
+```
+- sample
 
 ```bash
 cd sample
