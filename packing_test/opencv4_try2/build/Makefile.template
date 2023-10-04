@@ -3,20 +3,18 @@ OPENCV_VERSION?=4.7.0
 TMP_DIR ?= ./source/
 
 clean:
-	rm -rf opencv-$(OPENCV_VERSION)/build
+	rm -rf opencv/build
 
 download:
-	curl -Lo opencv.zip https://github.com/opencv/opencv/archive/$(OPENCV_VERSION).zip
-	unzip -q opencv.zip
-	curl -Lo opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/$(OPENCV_VERSION).zip
-	unzip -q opencv_contrib.zip
-	rm opencv.zip opencv_contrib.zip
+	git clone --depth 1 -b $(OPENCV_VERSION) https://github.com/opencv/opencv -o opencv || true
+	git clone --depth 1 -b $(OPENCV_VERSION) https://github.com/opencv/opencv_contrib -o opencv_contrib || true
 
 .PHONY: build
 configure:
-	mkdir -p opencv-$(OPENCV_VERSION)/build; \
-		cd opencv-$(OPENCV_VERSION)/build && \
+	mkdir -p opencv/build; \
+		cd opencv/build && \
 		cmake \
+		-DCMAKE_INSTALL_PREFIX=install_dir \
 		-DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=OFF \
 		-DCMAKE_FIND_USE_PACKAGE_REGISTRY=OFF \
 		-DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=ON \
@@ -54,7 +52,7 @@ configure:
 		-DWITH_CUDNN=OFF \
 		-DWITH_CUFFT=OFF \
 		-DWITH_ENABLE_THIN_LTO=OFF \
-		-DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-$(OPENCV_VERSION)/modules \
+		-DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
 		-DOPENCL_LIBRARY=REPLACE_OPENCL_LIBRARY\
 		-DCMAKE_STRIP=REPLACE_CMAKE_STRIP \
 		-DCMAKE_RANLIB=REPLACE_CMAKE_RANLIB \
@@ -63,5 +61,9 @@ configure:
 		..
 
 build:
-	cd opencv-$(OPENCV_VERSION)/build && \
+	cd opencv/build && \
 		make -j$(nproc)
+
+install:
+	cd opencv/build && \
+		make install
