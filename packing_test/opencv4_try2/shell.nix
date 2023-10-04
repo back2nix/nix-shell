@@ -1,5 +1,5 @@
 {pkgs ? import <nixpkgs> {}}: let
-  opencv4WithDebug = pkgs.python310Packages.opencv4.overrideAttrs (finalAttrs: old: {
+  opencv = pkgs.python310Packages.opencv4.overrideAttrs (finalAttrs: old: {
     # separateDebugInfo = true;
     # dontStrip = true;
     # cmakeBuildType = "Debug";
@@ -75,34 +75,6 @@
     preInstall = ''
     '';
 
-    # postInstall = ''
-    #   make install
-    #   sed -i "s|{exec_prefix}/$out|{exec_prefix}|;s|{prefix}/$out|{prefix}|" \
-    #   "$out/lib/pkgconfig/opencv4.pc"
-    # '';
-
-    # postBuild = ''
-    # '';
-
-    # preConfigure =
-    #   old.preConfigure
-    #   + ''
-    #     false
-    #   '';
-
-    # preBuild = ''
-    #   # echo "ls ."
-    #   #   ls .
-    #   # echo "ls .."
-    #   #   ls ..
-    #   # echo "ls ../.."
-    #   #   ls ../..
-    #     # mkdir -p $out/save
-    #     # cp -r ../../source $out/save
-    #     false
-    # '';
-    # export NIX_ENFORCE_PURITY=0 - not work
-
     # dontBuild = true;
     # setSourceRoot = "/home/bg/Documents/code/github.com/back2nix/nix/nix-shell/opencv/source";
     # sourceRoot = "/home/bg/Documents/code/github.com/back2nix/nix/nix-shell/opencv/srcRoot";
@@ -116,23 +88,16 @@
     # contribSrc = builtins.fetchGit /home/bg/Documents/code/github.com/back2nix/nix/nix-shell/packing_test/opencv/source/opencv_contrib;
     # testDataSrc = builtins.fetchGit /home/bg/Documents/code/github.com/back2nix/nix/nix-shell/packing_test/opencv/source/opencv_extra;
   });
-  # hello = pkgs.callPackage ./hello.nix { };
 in
   pkgs.mkShell
   {
     name = "opencv4-shell";
 
-    # nativeBuildInputs is usually what you want -- tools you need to run
-    # nativeBuildInputs = with pkgs; [
-    #   # hello
-    #   stdenv
-    #   # opencv4WithDebug
-    #   gdb
-    #   cmake
-    # ];
-
-    nativeBuildInputs = with pkgs; [
-      opencv4WithDebug
+    buildInputs = with pkgs; [
+      stdenv
+      gdb
+      cmake
+      opencv
     ];
 
     # shellHook = ''
@@ -143,6 +108,4 @@ in
     # cd $sourceRoot
     # runHook patchPhase
     # '';
-
-    # hardeningDisable = [ "all" ];
   }
