@@ -13,22 +13,6 @@ nix-shell --pure
 
 - для этого можно использовать `make download`
 - shell.nix позволит сбилдить проект с нужным флагами 
-- при первой долгой компиляции нужно изменить скрипт так чтобы вытащить рабочую дирректорию с компиляцией
-
-```shell.nix
-    buildPhase = ''
-      make -j$(nproc)
-
-      echo Path:
-      echo $out
-
-      ## -- for get prebuild + source folders
-      ## -- required only on the first stage, then you need to comment
-      mkdir -p $out/source/build
-      cp -r * $out/source/build
-      false
-    '';
-```
 - затем вручную скопировать все папки к себе в систему в любой удобный для вас путь, примерно так:
 
 ```bash
