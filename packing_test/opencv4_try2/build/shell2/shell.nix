@@ -1,6 +1,6 @@
 { pkgs ? import <nixpkgs> { } }:
 let
-  opencv = pkgs.callPackage ./package.nix { };
+  # opencv = pkgs.callPackage ./package.nix { };
 in
 with pkgs;
 pkgs.mkShell
@@ -13,7 +13,7 @@ pkgs.mkShell
     cmake
     git
     openssh
-    opencv
+    # opencv
     stdenv
   ];
 

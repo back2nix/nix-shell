@@ -8,3 +8,6 @@ configure:
 build:
 	cd build && \
 		make
+
+clean:
+	rm -rf build
