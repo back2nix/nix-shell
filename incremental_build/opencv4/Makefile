@@ -6,7 +6,7 @@ download:
 	git clone --depth 1 -b $(OPENCV_VERSION) https://github.com/opencv/opencv_contrib &&  \
 	mv opencv_contrib/modules source/opencv_contrib
 
-stage1: download
+stage1:
 	nix-build -A opencv
 
 stage2:
