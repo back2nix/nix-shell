@@ -1,12 +1,8 @@
-{ pkgs ? import <nixpkgs> { } }:
-let
-in
-{
+{pkgs ? import <nixpkgs> {}}: let
+in {
   opencv = pkgs.python310Packages.opencv4.overrideAttrs (finalAttrs: old: {
     dontStrip = true;
     cmakeBuildType = "Debug"; # if your wants debug build
-
-    # sourceRoot = ".";
 
     # dontUnpack = true;
     # dontPatch = true;
@@ -27,9 +23,6 @@ in
         echo Path out:
         echo $out
       '';
-
-    # buildPhase = ''
-    # '';
 
     preInstall = ''
     '';
@@ -55,14 +48,3 @@ in
     };
   });
 }
-# pkgs.mkShell
-# {
-#   name = "custom-opencv4-shell";
-#
-#   buildInputs = with pkgs; [
-#     stdenv
-#     gdb
-#     cmake
-#     opencv
-#   ];
-# }
