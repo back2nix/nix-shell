@@ -1,4 +1,7 @@
-{pkgs ? import <nixpkgs> {}}: let
+{ pkgs ? import <nixpkgs> { } }:
+let
+in
+{
   opencv = pkgs.python310Packages.opencv4.overrideAttrs (finalAttrs: old: {
     dontStrip = true;
     cmakeBuildType = "Debug"; # if your wants debug build
@@ -20,43 +23,46 @@
       old.postConfigure
       + ''
         cp -r ../../source $out
-        echo Path:
+        mv $out/build $out/build_bk
+        echo Path out:
         echo $out
       '';
 
-    buildPhase = ''
-      make -j$(nproc)
-
-      echo Path:
-      echo $out
-
-      ## -- for get prebuild + source folders
-      ## -- required only on the first stage, then you need to comment
-      mkdir -p $out/source/build
-      cp -r * $out/source/build
-      false
-    '';
+    # buildPhase = ''
+    # '';
 
     preInstall = ''
     '';
+
+    postInstall =
+      old.postInstall
+      + ''
+        # make -j$(nproc)
+        echo Pre Build Path:
+        echo $out
+
+        mkdir -p $out/build
+        cp -r * $out/build
+        false
+      '';
 
     # src = ./debug/source; # second run, set: dontPatch = true;
 
     # first run so the stalemate can apply
     src = builtins.fetchGit {
       shallow = true;
-      url = ./debug/source; # without prebuild, only source
+      url = ./stage1/source; # without prebuild, only source
     };
   });
-in
-  pkgs.mkShell
-  {
-    name = "custom-opencv4-shell";
-
-    buildInputs = with pkgs; [
-      stdenv
-      gdb
-      cmake
-      opencv
-    ];
-  }
+}
+# pkgs.mkShell
+# {
+#   name = "custom-opencv4-shell";
+#
+#   buildInputs = with pkgs; [
+#     stdenv
+#     gdb
+#     cmake
+#     opencv
+#   ];
+# }

@@ -13,16 +13,16 @@ make download
 ```
 
 ```bash
-cp 1.stage.shell.nix shell.nix
-nix-shell --pure
+make stage1
 ```
 
 - shell.nix сбилдит проект с нужным флагами и патчами
 - затем вручную скопировать все папки к себе в систему в любой удобный для вас путь, примерно так:
+- путь пребилдом будет напечатан когда зафейлится первая стадия
 
 ```bash
-mkdir -p debug2/source
-cd debug2/source
+mkdir -p debug/source
+cd debug/source
 cp -r /nix/store/z47iqmixhnl9vb0h1znp41gfgwvkbzqm-opencv-4.7.0/* .
 ```
 
@@ -31,8 +31,7 @@ cp -r /nix/store/z47iqmixhnl9vb0h1znp41gfgwvkbzqm-opencv-4.7.0/* .
 - После подставляем сохраненный prebuild и nix уже не будет билдить с нуля
 
 ```bash
-cp 2.stage.shell.nix shell.nix
-nix-shell --pure
+nix-shell
 ```
 
 - в конце `nix-shell --pure` должен проинсталить вашу модифицированную opencv в систему и можно будет компилировать
@@ -44,7 +43,7 @@ nix-shell --pure
 - если еще не запустили nix-shell
 
 ```bash
-nix-shell --pure
+nix-shell
 ```
 - sample
 
