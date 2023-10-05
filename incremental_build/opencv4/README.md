@@ -57,6 +57,8 @@ cd build
 
 ```
 gdb opencv_example
+>> b loadsave.cpp:629
+>> r
 ```
 
 # clean garbage
