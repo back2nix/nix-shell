@@ -1,6 +1,9 @@
-{pkgs ? import <nixpkgs> {}}: let
-in {
+{ pkgs ? import <nixpkgs> { } }:
+let
+in
+{
   opencv = pkgs.python310Packages.opencv4.overrideAttrs (finalAttrs: old: {
+    separateDebugInfo = true;
     dontStrip = true;
     cmakeBuildType = "Debug"; # if your wants debug build
 

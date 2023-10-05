@@ -13,7 +13,7 @@ make download
 ```
 
 ```bash
-make stage1
+make stage1-build
 ```
 
 - shell.nix сбилдит проект с нужным флагами и патчами
@@ -53,8 +53,14 @@ make configure
 make build
 cd build
 ```
-- далее можно отлаживать 
+- далее можно отлаживать, но gdb + `~/.gdbinit` должен быть вот этот https://github.com/symphorien/nixseparatedebuginfod, чтобы он видил отладочные символы
 
 ```
 gdb opencv_example
+```
+
+# clean garbage
+
+```bash
+nix-store --gc
 ```
