@@ -1,5 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
-let
+{pkgs ? import <nixpkgs> {}}: let
   opencv = pkgs.python310Packages.opencv4.overrideAttrs (finalAttrs: old: {
     separateDebugInfo = true;
     dontStrip = true;
@@ -16,6 +15,9 @@ let
       "out"
     ];
 
+    # block postUnpack
+    postUnpack = '''';
+
     # bock
     postConfigure = '''';
 
@@ -27,16 +29,18 @@ let
     '';
 
     src = ./debug/source; # second run, set: dontPatch = true;
+    # Pre Build Path:
+    # src = debugSrc; # second run, set: dontPatch = true;
   });
 in
-pkgs.mkShell
-{
-  name = "custom-opencv4-shell";
+  pkgs.mkShell
+  {
+    name = "custom-opencv4-shell";
 
-  buildInputs = with pkgs; [
-    stdenv
-    gdb
-    cmake
-    opencv
-  ];
-}
+    buildInputs = with pkgs; [
+      stdenv
+      gdb
+      cmake
+      opencv
+    ];
+  }

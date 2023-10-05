@@ -1,6 +1,6 @@
 OPENCV_VERSION?=4.7.0
 
-download:
+stage0-download:
 	mkdir -p stage1; cd stage1 && \
 	git clone --depth 1 -b $(OPENCV_VERSION) https://github.com/opencv/opencv source|| true; \
 	git clone --depth 1 -b $(OPENCV_VERSION) https://github.com/opencv/opencv_contrib &&  \
@@ -9,6 +9,9 @@ download:
 PHONY: stage1-build
 stage1-build:
 	nix-build -A opencv
+	ls debug || ( mkdir -p debug/source && \
+		cp -r result/* debug/source && \
+		cp -r debug/source/share/doc debug/source/ )
 
-stage2:
+stage2-shell:
 	nix-shell

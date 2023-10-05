@@ -12,6 +12,7 @@ in
     # dontBuild = true;
     # dontConfigure = true;
     # dontInstall = true;
+    # dontFixup = true;
     doChek = false;
 
     outputs = [
@@ -27,8 +28,9 @@ in
         echo $out
       '';
 
-    preInstall = ''
-    '';
+    preInstall = '''';
+
+    phaseInstall = '''';
 
     postInstall =
       old.postInstall
@@ -39,10 +41,14 @@ in
 
         mkdir -p $out/build
         cp -r * $out/build
-        false
+
+        cp $out/lib/pkgconfig/opencv4.pc $out/build/unix-install/opencv4.pc
       '';
 
-    # src = ./debug/source; # second run, set: dontPatch = true;
+    installCheckPhase = '''';
+    # preDistPhases = '''';
+    # distPhase = '''';
+    # postPhases = '''';
 
     # first run so the stalemate can apply
     src = builtins.fetchGit {
