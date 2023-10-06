@@ -77,11 +77,12 @@ cd build
 
 - если нет gdb dashboard, можно использовать встроенный
 
-```
+```bash
 (gdb) layout src
 ```
+- отлаживаем
 
-```
+```bash
 gdb opencv_example
 (gdb) b loadsave.cpp:629
 (gdb) r
@@ -90,11 +91,13 @@ gdb opencv_example
 
 # gdb with python
 
+```bash
 gdb python
 (gdb) b loadsave.cpp:629
 (gdb) run sample.py
 (gdb) r
 (gdb) next
+```
 
 # clean garbage
 
