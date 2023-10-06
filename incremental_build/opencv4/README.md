@@ -68,6 +68,13 @@ gdb opencv_example
 (gdb) r
 ```
 
+# gdb with python
+
+gdb python
+(gdb) b loadsave.cpp:629
+(gdb) run sample.py
+(gdb) r
+
 # clean garbage
 
 ```bash
