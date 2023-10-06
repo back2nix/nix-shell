@@ -89,7 +89,7 @@ gdb opencv_example
 (gdb) next
 ```
 
-# gdb with python
+### gdb with python
 
 ```bash
 gdb python
@@ -99,7 +99,7 @@ gdb python
 (gdb) next
 ```
 
-# clean garbage
+### clean garbage
 
 ```bash
 nix-store --gc
