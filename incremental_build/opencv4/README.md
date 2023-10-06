@@ -1,4 +1,4 @@
-# Incremental build
+# Incremental build package in nix
 
 Это нужно для упрощения разработки.
 
