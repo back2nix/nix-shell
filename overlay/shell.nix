@@ -6,7 +6,6 @@ in
     {
       name = "refind-shell";
 
-      # nativeBuildInputs
       buildInputs = with pkgs; [
         refind
       ];
