@@ -7,6 +7,7 @@ in
       name = "refind-shell";
 
       buildInputs = with pkgs; [
+        efibootmgr
         refind
       ];
 
