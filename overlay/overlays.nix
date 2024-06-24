@@ -3,13 +3,17 @@ self: super: {
     inherit (self.darwin.apple_sdk_11_0.frameworks) Foundation Security buildGo121Package;
   };
 
-  buildGo121Module = self.darwin.apple_sdk_11_0.callPackage ../go/module.nix {
+  buildGo121Module = self.darwin.apple_sdk_11_0.callPackage ./go/module.nix {
     go = self.go_1_21;
   };
 
-  buildGo121Package = self.darwin.apple_sdk_11_0.callPackage ../go/package.nix {
+  buildGo121Package = self.darwin.apple_sdk_11_0.callPackage ./go/package.nix {
     go = self.go_1_21;
   };
+
+  ginkgo = self.callPackage ./go/ginkgo.nix { };
 
   go = self.go_1_21;
+
+  yandex-browser = self.callPackage ./browser/yandex-browser.nix { };
 }

@@ -44,6 +44,8 @@ in
 
     venvDir = "venv310";
 
+    LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib/";
+
     postShellHook = ''
       pip install -r requirements.txt
     '';
