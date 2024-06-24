@@ -1,4 +1,4 @@
-develop:
+dev:
 	@ nix develop --ignore-environment \
 		--keep HOME \
 		--keep TERM \
