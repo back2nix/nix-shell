@@ -44,6 +44,7 @@
           pkgs.which
           env-wheel
           pip
+          python
           pkgs.xz
           pkgs.wget
           pkgs.git
@@ -59,6 +60,8 @@
           shellHook = ''
             # echo "Launching 'python flake template' shell"
             echo -e "\e[34m`cat .nixos.ico`\e[0m"
+            zsh
+            exit
           '';
 
           env = {
