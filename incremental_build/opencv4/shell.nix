@@ -1,5 +1,10 @@
-{ pkgs ? import <nixpkgs> { } }:
-let
+{}: let
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.05";
+  pkgs = import nixpkgs {
+    config = {};
+    overlays = [];
+  };
+
   opencv = pkgs.python310Packages.opencv4.overrideAttrs (finalAttrs: old: {
     separateDebugInfo = true;
     dontStrip = true;
@@ -34,14 +39,14 @@ let
     # src = debugSrc; # second run, set: dontPatch = true;
   });
 in
-pkgs.mkShell
-{
-  name = "custom-opencv4-shell";
+  pkgs.mkShell
+  {
+    name = "custom-opencv4-shell";
 
-  buildInputs = with pkgs; [
-    stdenv
-    gdb
-    cmake
-    opencv
-  ];
-}
+    buildInputs = with pkgs; [
+      stdenv
+      gdb
+      cmake
+      opencv
+    ];
+  }

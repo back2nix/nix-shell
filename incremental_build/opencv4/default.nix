@@ -1,7 +1,10 @@
-{ pkgs ? import <nixpkgs> { } }:
-let
-in
-{
+{}: let
+  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-23.05";
+  pkgs = import nixpkgs {
+    config = {};
+    overlays = [];
+  };
+in {
   opencv = pkgs.python310Packages.opencv4.overrideAttrs (finalAttrs: old: {
     separateDebugInfo = true;
     dontStrip = true;
