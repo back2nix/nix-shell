@@ -93,7 +93,8 @@
             ({...}: {
               services.miredo = {
                 enable = true;
-                serverAddress = "teredo.remlab.net";
+                # serverAddress = "teredo.remlab.net";
+                serverAddress = "217.17.192.217";
               };
             })
           ];
@@ -117,7 +118,7 @@
 
           ${pkgs.miredo}/bin/miredo -f -c ${pkgs.writeText "miredo.conf" ''
             InterfaceName teredo
-            ServerAddress teredo.remlab.net
+            ServerAddress 217.17.192.217
             BindAddress 0.0.0.0
             BindPort 3545
           ''} --pidfile="$TEMP_DIR/miredo.pid"
