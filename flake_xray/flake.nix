@@ -228,7 +228,7 @@
           EOF
 
           # Run the command through proxychains4
-          ${pkgs.proxychains}/bin/proxychains4 -f $TEMP_CONFIG curl https://ifconfig.me
+          ${pkgs.proxychains}/bin/proxychains4 -f $TEMP_CONFIG ${pkgs.curl}/bin/curl https://ifconfig.me
 
           # Clean up the temporary config file
           rm $TEMP_CONFIG
