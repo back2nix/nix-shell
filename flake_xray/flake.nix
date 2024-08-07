@@ -215,12 +215,6 @@
 
         # New function to run command through proxy
         runThroughProxy = pkgs.writeShellScriptBin "run-through-proxy" ''
-          # Ensure proxychains4 is installed
-          if ! command -v proxychains4 &> /dev/null; then
-            echo "proxychains4 is not installed. Please install it first."
-            exit 1
-          fi
-
           # Create a temporary proxychains config file
           TEMP_CONFIG=$(mktemp)
           cat << EOF > $TEMP_CONFIG
@@ -234,7 +228,7 @@
           EOF
 
           # Run the command through proxychains4
-          proxychains4 -f $TEMP_CONFIG curl https://ifconfig.me
+          ${pkgs.proxychains}/bin/proxychains4} -f $TEMP_CONFIG curl https://ifconfig.me
 
           # Clean up the temporary config file
           rm $TEMP_CONFIG
