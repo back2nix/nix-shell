@@ -18,6 +18,7 @@ nix run "github:back2nix/nix-shell?dir=flake_xray#generate-config"
 ```bash
 nix run .#server
 nix run .#client
+nix run .#client-with-dpi
  # for check proxy. analog 'proxychains4 curl https://ifconfig.me'
 nix run .#run-through-proxy
 ```
@@ -26,6 +27,7 @@ nix run .#run-through-proxy
 ```bash
 nix run "github:back2nix/nix-shell?dir=flake_xray#server"
 nix run "github:back2nix/nix-shell?dir=flake_xray#client"
+nix run "github:back2nix/nix-shell?dir=flake_xray#client-with-dpi"
  # for check proxy. analog 'proxychains4 curl https://ifconfig.me'
 nix run "github:back2nix/nix-shell?dir=flake_xray#run-through-proxy"
 ```
@@ -43,6 +45,7 @@ error: experimental Nix feature 'flakes' is disabled; add '--extra-experimental-
 nix run --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#generate-config"
 nix run --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#server"
 nix run --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#client"
+nix run --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#client-with-dpi"
 nix run --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#run-through-proxy"
 ```
 
@@ -54,5 +57,6 @@ nix run --extra-experimental-features nix-command --extra-experimental-features 
 nix run --refresh --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#generate-config"
 nix run --refresh --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#server"
 nix run --refresh --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#client"
+nix run --refresh --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#client-with-dpi"
 nix run --refresh --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#run-through-proxy"
 ```

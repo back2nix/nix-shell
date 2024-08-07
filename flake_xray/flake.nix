@@ -40,6 +40,12 @@
           echo "};"
         '';
 
+        # SpoofDPI configuration
+        spoofDpiConfig = {
+          address = "127.0.0.1";
+          port = 18090;
+        };
+
         # Configuration variables
         # REPLACE ME. This is fake data for example
         xrayConfig = {
@@ -110,6 +116,18 @@
             {
               protocol = "freedom";
               tag = "direct";
+            }
+            {
+              protocol = "socks";
+              tag = "spoofdpi";
+              settings = {
+                servers = [
+                  {
+                    address = spoofDpiConfig.address;
+                    port = spoofDpiConfig.port;
+                  }
+                ];
+              };
             }
           ];
         });
@@ -233,8 +251,27 @@
           # Clean up the temporary config file
           rm $TEMP_CONFIG
         '';
+
+        spoofdpi = pkgs.callPackage ./spoofdpi.nix {};
+
+        # Function to run Xray client with SpoofDPI
+        runXrayClientWithSpoofDpi = pkgs.writeShellScriptBin "run-xray-client-with-spoofdpi" ''
+          # Start SpoofDPI
+          ${spoofdpi}/bin/spoofdpi \
+            -addr ${spoofDpiConfig.address} \
+          ${spoofdpi}/bin/spoofdpi \
+          SPOOFDPI_PID=$!
+
+          # Start Xray client
+          ${pkgs.xray}/bin/xray run -config ${clientConfig}
+
+          # Clean up
+          kill $SPOOFDPI_PID
+        '';
       in rec {
         packages = rec {
+          xray-client-with-spoofdpi = runXrayClientWithSpoofDpi;
+
           xray-client = pkgs.writeShellScriptBin "run-xray-client" ''
             ${pkgs.xray}/bin/xray run -config ${clientConfig}
           '';
@@ -251,6 +288,9 @@
         };
 
         apps = rec {
+          client-with-dpi = flake-utils.lib.mkApp {
+            drv = packages.xray-client-with-spoofdpi;
+          };
           client = flake-utils.lib.mkApp {
             drv = packages.xray-client;
           };
@@ -267,7 +307,7 @@
             drv = packages.xray-run-through-proxy;
           };
 
-          default = client;
+          default = packages.xray-client-with-spoofdpi;
         };
       }
     );
