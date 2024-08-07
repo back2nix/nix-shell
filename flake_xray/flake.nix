@@ -31,12 +31,12 @@
           echo ""
           echo "xrayConfig = {"
           echo "  serverAddress = \"127.0.0.1\"; # yor external ip server. example '133.33.33.33'"
-          echo "  serverPort = 1080; # change port"
+          echo "  serverPort = 1090; # change port"
           echo "  userId = \"$USER_ID\";"
           echo "  publicKey = \"$PUBLIC_KEY\";"
           echo "  privateKey = \"$PRIVATE_KEY\";"
-          echo "  socksPort = 1081; # change port"
-          echo "  httpPort = 1082; # change port"
+          echo "  socksPort = 1091; # change port"
+          echo "  httpPort = 1092; # change port"
           echo "};"
         '';
 
@@ -44,12 +44,12 @@
         # REPLACE ME. This is fake data for example
         xrayConfig = {
           serverAddress = "127.0.0.1"; # CHANGE ME!!! Yor external ip server. example '133.33.33.33'"
-          serverPort = 1080; # change port
+          serverPort = 1090; # change port
           userId = "ec209473-9f70-474f-a686-cc69496118fa"; # CHANGE ME!!!! nix run .#generate-config
           publicKey = "VsuXH2iP8dUzJbsKO9BxLOmYwS_jyIjxPrQtfC_S-A0"; # CHANGE ME!!!! nix run .#generate-config
           privateKey = "WGU9hz1U8VohgC2JI_MGyVl74KnGiu2-2jIgOCXNxB0"; # CHANGE ME!!!! nix run .#generate-config
-          socksPort = 1081; # Extracted SOCKS port for reuse
-          httpPort = 1082; # HTTP port (if needed)
+          socksPort = 1091; # Extracted SOCKS port for reuse
+          httpPort = 1092; # HTTP port (if needed)
         };
 
         clientConfig = pkgs.writeText "xray-client-config.json" (builtins.toJSON {
