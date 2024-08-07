@@ -10,6 +10,7 @@ This is an xray (VPN) package with vless + reality
 
 ```
 nix run .#generate-config
+# or
 nix run "github:back2nix/nix-shell?dir=flake_xray#generate-config"
 ```
 - use
