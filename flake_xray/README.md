@@ -7,7 +7,7 @@ This package provides an xray (VPN) setup with VLESS protocol and REALITY for en
 ## Prerequisites
 
 - Nix package manager
-- (Optional) Google Chrome browser for proxy configuration
+- (Optional) Google Chrome browser for proxy configuration and (SwitchyOmega extension)
 
 ## Installation and Setup
 
@@ -35,12 +35,8 @@ nix run .#server
 
 # Start the client
 nix run .#client
-<<<<<<< Updated upstream
- # for check proxy. analog 'proxychains4 curl https://ifconfig.me'
-=======
 
 # Test the proxy (similar to 'proxychains4 curl https://ifconfig.me')
->>>>>>> Stashed changes
 nix run .#run-through-proxy
 ```
 
@@ -49,10 +45,8 @@ Alternatively, you can use these commands:
 ```bash
 nix run "github:back2nix/nix-shell?dir=flake_xray#server"
 nix run "github:back2nix/nix-shell?dir=flake_xray#client"
-<<<<<<< Updated upstream
- # for check proxy. analog 'proxychains4 curl https://ifconfig.me'
-=======
->>>>>>> Stashed changes
+
+# for check proxy. analog 'proxychains4 curl https://ifconfig.me'
 nix run "github:back2nix/nix-shell?dir=flake_xray#run-through-proxy"
 ```
 
