@@ -8,6 +8,12 @@ This package provides an xray (VPN) setup with VLESS protocol and REALITY for en
 
 - Nix package manager
 - (Optional) Google Chrome browser for proxy configuration and (SwitchyOmega extension)
+- (Optional) Android v2rayNG
+
+- Android v2rayNG example config. Import from copy buffer
+```
+vless://ec209473-9f70-474f-a686-cc69496118fa@133.333.333.33:1090?security=reality&encryption=none&alpn=http/1.1&pbk=VsuXH2iP8dUzJbsKO9BxLOmYwS_jyIjxPrQtfC_S-A0&headerType=none&fp=firefox&spx=%2F&type=tcp&flow=xtls-rprx-vision&sni=www.google.com&sid=114514#x-ray+vless+tcp+reality
+```
 
 ## Installation and Setup
 

@@ -43,7 +43,7 @@
         # Configuration variables
         # REPLACE ME. This is fake data for example
         xrayConfig = {
-          serverAddress = "127.0.0.1"; # CHANGE ME!!! Yor external ip server. example '133.33.33.33'"
+          serverAddress = "127.0.0.1"; # CHANGE ME!!! Yor external ip server. example '133.333.33.33'"
           serverPort = 1090; # change port
           userId = "ec209473-9f70-474f-a686-cc69496118fa"; # CHANGE ME!!!! nix run .#generate-config
           publicKey = "VsuXH2iP8dUzJbsKO9BxLOmYwS_jyIjxPrQtfC_S-A0"; # CHANGE ME!!!! nix run .#generate-config
