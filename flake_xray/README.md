@@ -44,5 +44,8 @@ nix run --extra-experimental-features nix-command --extra-experimental-features 
 - update flake
 
 ```bash
+nix run --refresh --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#generate-config"
 nix run --refresh --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#server"
+nix run --refresh --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#client"
+nix run --refresh --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#run-through-proxy"
 ```
