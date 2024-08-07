@@ -117,8 +117,8 @@
         serverConfig = pkgs.writeText "xray-server-config.json" (builtins.toJSON {
           log = {
             loglevel = "debug";
-            access = "/tmp/access.log";
-            error = "/tmp/error.log";
+            # access = "/tmp/access.log";
+            # error = "/tmp/error.log";
           };
           routing = {
             domainStrategy = "IPIfNonMatch";
