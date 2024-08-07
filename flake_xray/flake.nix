@@ -35,6 +35,8 @@
           echo "  userId = \"$USER_ID\";"
           echo "  publicKey = \"$PUBLIC_KEY\";"
           echo "  privateKey = \"$PRIVATE_KEY\";"
+          echo "  socksPort = 1081; # change port"
+          echo "  httpPort = 1082; # change port"
           echo "};"
         '';
 
@@ -46,8 +48,8 @@
           userId = "ec209473-9f70-474f-a686-cc69496118fa"; # CHANGE ME!!!! nix run .#generate-config
           publicKey = "VsuXH2iP8dUzJbsKO9BxLOmYwS_jyIjxPrQtfC_S-A0"; # CHANGE ME!!!! nix run .#generate-config
           privateKey = "WGU9hz1U8VohgC2JI_MGyVl74KnGiu2-2jIgOCXNxB0"; # CHANGE ME!!!! nix run .#generate-config
-          socksPort = 1082; # Extracted SOCKS port for reuse
-          httpPort = 10810; # HTTP port (if needed)
+          socksPort = 1081; # Extracted SOCKS port for reuse
+          httpPort = 1082; # HTTP port (if needed)
         };
 
         clientConfig = pkgs.writeText "xray-client-config.json" (builtins.toJSON {
