@@ -24,3 +24,18 @@ nix run "github:back2nix/nix-shell?dir=flake_xray#client"
  # for check proxy. analog 'proxychains4 curl https://ifconfig.me'
 nix run "github:back2nix/nix-shell?dir=flake_xray#run-through-proxy"
 ```
+
+### Error
+
+```bash
+error: experimental Nix feature 'nix-command' is disabled; add '--extra-experimental-features nix-command' to enable it
+error: experimental Nix feature 'flakes' is disabled; add '--extra-experimental-features flakes' to enable it
+```
+
+- fix:
+
+```bash
+nix run --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#server"
+nix run --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#client"
+nix run --extra-experimental-features nix-command --extra-experimental-features flakes "github:back2nix/nix-shell?dir=flake_xray#run-through-proxy"
+```
