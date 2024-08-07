@@ -24,8 +24,8 @@
 
           # Generate key pair
           KEY_PAIR=$(${pkgs.xray}/bin/xray x25519)
-          PRIVATE_KEY=$(echo "$KEY_PAIR" | grep "Private key:" | awk '{print $3}')
-          PUBLIC_KEY=$(echo "$KEY_PAIR" | grep "Public key:" | awk '{print $3}')
+          PRIVATE_KEY=$(${pkgs.coreutils}/bin/echo "$KEY_PAIR" | ${pkgs.gnugrep}/bin/grep "Private key:" | ${pkgs.gawk}/bin/awk '{print $3}')
+          PUBLIC_KEY=$(${pkgs.coreutils}/bin/echo "$KEY_PAIR" | ${pkgs.gnugrep}/bin/grep "Public key:" | ${pkgs.gawk}/bin/awk '{print $3}')
 
           echo "# Add the following to your xrayConfig: in flake.nix"
           echo ""
