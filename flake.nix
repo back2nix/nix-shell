@@ -1,10 +1,20 @@
 {
+  inputs.miredo-flake = {
+    url = "github:back2nix/nix-shell?dir=flake_miredo";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   outputs = {
     self,
     nixpkgs,
+    miredo-flake,
   }: {
-    packages.x86_64-linux.miredo = ./flake_miredo;
-    # или
-    # packages.x86_64-linux.default = ...;
+    nixosConfigurations.your-hostname = nixpkgs.lib.nixosSystem {
+      # ...
+      modules = [
+        miredo-flake.nixosModules.default
+        # Другие модули...
+      ];
+    };
   };
 }
