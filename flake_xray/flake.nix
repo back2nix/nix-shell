@@ -116,7 +116,7 @@
 
         serverConfig = pkgs.writeText "xray-server-config.json" (builtins.toJSON {
           log = {
-            loglevel = "debug";
+            loglevel = "warning";
             # access = "/tmp/access.log";
             # error = "/tmp/error.log";
           };
